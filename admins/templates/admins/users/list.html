@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h2 class="title">Gestión de Usuarios</h2>
+
+    <div class="actions">
+        <a href="{% url 'admins:user_create' %}" class="btn btn-primary">➕ Crear Usuario</a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Nombre</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.first_name }} {{ user.last_name }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                    <a href="{% url 'admins:user_edit' user.pk %}" class="btn btn-edit">✏️ Editar</a>
+                    <a href="{% url 'admins:user_delete' user.pk %}" class="btn btn-delete">🗑️ Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No hay usuarios registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

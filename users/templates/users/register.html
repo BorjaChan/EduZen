@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>EduZen - Registro</title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <link rel="stylesheet" href="{% static 'css/error.css' %}">
+</head>
+<body>
+    <div class="login-card">
+        <!-- Sección izquierda (logo) -->
+        <div class="login-left">
+           
+            
+        </div>
+
+        <!-- Sección derecha (formulario) -->
+        <div class="login-right">
+            <h3>Registro de Estudiante</h3>
+            
+            <form method="post">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="form-errors">
+                        {{ form.non_field_errors|striptags }}
+                    </div>
+                {% endif %}
+
+                <div class="user-details">
+                    {% for field in form %}
+                        <div class="input-box">
+                            <label>{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <div class="error-msg">{{ field.errors|striptags }}</div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="button">
+                    <input type="submit" value="Registrarse">
+                </div>
+            </form>
+
+            <p class="crear-cuenta-texto">
+                ¿Ya tienes una cuenta?
+                <a href="{% url 'users:login' %}" class="crear-cuenta-link">Inicia sesión aquí</a>.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

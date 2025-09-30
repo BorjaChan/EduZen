@@ -1,0 +1,34 @@
+.error-msg {
+color: red;
+font-size: 13px;
+margin-top: 5px;
+}
+.form-errors {
+background: #ffe5e5;
+border: 1px solid #ff9999;
+color: #990000;
+padding: 10px;
+margin-bottom: 15px;
+border-radius: 6px;
+}
+        .error-msg {
+            color: red;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .form-errors {
+            background: #ffe5e5;
+            border: 1px solid #ff9999;
+            color: #990000;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+        }
+
+        .user-details input[type="text"],
+        .user-details input[type="email"],
+        .user-details input[type="password"],
+        .user-details select {
+            width: 100%;
+        }

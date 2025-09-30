@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>EduZen - Bienvenido</title>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+</head>
+<body>
+    <div class="auth-container">
+        <h2>Bienvenido a EduZen</h2>
+        <a href="{% url '' %}"><button>Iniciar sesión</button></a>
+        <a href="{% url 'register_student' %}"><button>Registrarme</button></a>
+    </div>
+</body>
+</html>
