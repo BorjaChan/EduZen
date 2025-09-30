@@ -11,12 +11,12 @@ from django.contrib.auth.decorators import login_required
 
 
 class CustomLoginView(LoginView):
-    template_name = 'users/login_form.html'  # tu formulario de login personalizado
+    template_name = 'users/login_form.html'
 
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return redirect('dashboard')  # Si ya está logueado, manda al dashboard
-        return super().dispatch(request, *args, **kwargs)
+    def get_success_url(self):
+        if self.request.user.role == "admin":
+            return reverse_lazy("admins:dashboard")  # dashboard admin
+        return reverse_lazy("core:dashboard")
 
 def student_register_view(request):
     if request.method == 'POST':
@@ -28,7 +28,7 @@ def student_register_view(request):
             user.ficha = form.cleaned_data['ficha']  
             user.role = 'estudiante'
             user.save()
-            return redirect('login')
+            return redirect('users:login')
     else:
         form = StudentRegisterForm()
 
