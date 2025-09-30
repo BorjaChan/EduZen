@@ -15,7 +15,7 @@ class CustomLoginView(LoginView):
 
     def get_success_url(self):
         if self.request.user.role == "admin":
-            return reverse_lazy("admins:dashboard")  # dashboard admin
+            return reverse_lazy("admins:dashboard") 
         return reverse_lazy("core:dashboard")
 
 def student_register_view(request):

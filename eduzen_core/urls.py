@@ -26,9 +26,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("users.urls")),   # Home primero
-
-    # Dashboards
+    path("", include("users.urls")),  
     path("dashboard/", include("core.urls")),
     path("students/", include("students.urls")),   
     path("materias/", include("materias.urls")),

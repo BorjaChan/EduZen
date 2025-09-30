@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Instituciones</h2>
+<a href="{% url 'admins:institucion_create' %}" class="btn">+ Crear Institución</a>
+
+<ul>
+    {% for institucion in instituciones %}
+        <li>{{ institucion.nombre }} - {{ institucion.get_asignacion_grupo_display }} / {{ institucion.get_asignacion_materia_display }}</li>
+    {% empty %}
+        <li>No hay instituciones aún</li>
+    {% endfor %}
+</ul>
+{% endblock %}

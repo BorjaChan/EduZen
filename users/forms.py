@@ -2,9 +2,10 @@
 #Facilita la creación y validación de formularios HTML, como el de registro o contacto.
 
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from .models import CustomUser, Ficha
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import CustomUser, Ficha
+from instituciones.models import Institucion
+
 
 class StudentRegisterForm(UserCreationForm):
     ficha = forms.ModelChoiceField(
@@ -12,13 +13,19 @@ class StudentRegisterForm(UserCreationForm):
         empty_label="Seleccione una ficha",
         label="Ficha"
     )
+    institucion = forms.ModelChoiceField(
+        queryset=Institucion.objects.all(),
+        empty_label="Seleccione una institución",
+        label="Institución"
+    )
 
     class Meta:
         model = CustomUser
-        fields = ['first_name', 'last_name', 'ficha', 'email', 'password1', 'password2']
+        fields = ['first_name', 'last_name', 'institucion', 'ficha', 'email', 'password1', 'password2']
         labels = {
             'first_name': 'Nombres',
             'last_name': 'Apellidos',
+            'institucion': 'Institución',
             'ficha': 'Ficha',
             'email': 'Correo electrónico',
             'password1': 'Contraseña',
@@ -27,8 +34,6 @@ class StudentRegisterForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        
-
         for field in self.fields:
             self.fields[field].widget.attrs.update({
                 'class': 'form-control',
@@ -53,15 +58,17 @@ class StudentRegisterForm(UserCreationForm):
             raise forms.ValidationError("El correo no debe contener espacios.")
         return email
 
+
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ['first_name', 'last_name', 'email', 'role', 'ficha', 'password1', 'password2']
+        fields = ['first_name', 'last_name', 'email', 'role', 'institucion', 'ficha', 'password1', 'password2']
         labels = {
             'first_name': 'Nombres',
             'last_name': 'Apellidos',
             'email': 'Correo electrónico',
             'role': 'Rol',
+            'institucion': 'Institución',
             'ficha': 'Ficha (solo estudiantes)',
             'password1': 'Contraseña',
             'password2': 'Confirmar contraseña',
@@ -81,12 +88,13 @@ class CustomUserChangeForm(UserChangeForm):
 
     class Meta:
         model = CustomUser
-        fields = ['first_name', 'last_name', 'email', 'role', 'ficha']
+        fields = ['first_name', 'last_name', 'email', 'role', 'institucion', 'ficha']
         labels = {
             'first_name': 'Nombres',
             'last_name': 'Apellidos',
             'email': 'Correo electrónico',
             'role': 'Rol',
+            'institucion': 'Institución',
             'ficha': 'Ficha (solo estudiantes)',
         }
 

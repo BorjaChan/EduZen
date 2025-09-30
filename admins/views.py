@@ -1,17 +1,48 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
-from users.forms import CustomUserCreationForm, CustomUserChangeForm  # asegúrate que existan
-from .decorators import admin_required   # 👈 importamos nuestro decorador
+from users.forms import CustomUserCreationForm, CustomUserChangeForm  
+from .decorators import admin_required   
+from instituciones.models import Institucion
 
-User = get_user_model()  # Tu modelo de usuario personalizado (CustomUser)
+User = get_user_model()  
 
 
 @login_required
 @admin_required
 def admin_dashboard(request):
-    return render(request, "admins/dashboard.html")
+    instituciones = Institucion.objects.all()
 
+   
+    data = []
+    for inst in instituciones:
+        data.append({
+            "id": inst.id,
+            "nombre": inst.nombre,
+            "total_usuarios": inst.usuarios.count(),   
+            "total_materias": inst.materias.count(),
+            "total_fichas": inst.fichas.count(),
+        })
+
+    return render(request, "admins/dashboard.html", {
+        "instituciones": data,
+    })
+
+
+@login_required
+@admin_required
+def institution_detail(request, pk):
+    institucion = get_object_or_404(Institucion, pk=pk)
+    materias = institucion.materias.all()
+    fichas = institucion.fichas.all()
+    usuarios = institucion.usuarios.all()
+
+    return render(request, "admins/institution_detail.html", {
+        "institucion": institucion,
+        "materias": materias,
+        "fichas": fichas,
+        "usuarios": usuarios,
+    })
 
 @login_required
 @admin_required
@@ -55,3 +86,23 @@ def user_delete(request, pk):
         user.delete()
         return redirect("admins:user_list")
     return render(request, "admins/users/delete.html", {"user": user})
+
+def institucion_list(request):
+    instituciones = Institucion.objects.all()
+    return render(request, "admins/instituciones/list.html", {"instituciones": instituciones})
+
+def institucion_create(request):
+    if request.method == "POST":
+        nombre = request.POST.get("nombre")
+        politica_retencion = request.POST.get("politica_retencion")
+        asignacion_grupo = request.POST.get("asignacion_grupo")
+        asignacion_materia = request.POST.get("asignacion_materia")
+
+        Institucion.objects.create(
+            nombre=nombre,
+            politica_retencion=politica_retencion,
+            asignacion_grupo=asignacion_grupo,
+            asignacion_materia=asignacion_materia,
+        )
+        return redirect("admins:institucion_list")
+    return render(request, "admins/instituciones/create.html")

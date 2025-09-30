@@ -37,7 +37,14 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default="estudiante")
-    ficha = models.ForeignKey('Ficha', null=True, blank=True, on_delete=models.SET_NULL)  # estudiante o docente
+    ficha = models.ForeignKey('Ficha', null=True, blank=True, on_delete=models.SET_NULL)  
+    institucion = models.ForeignKey(
+        "instituciones.Institucion",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name="usuarios"
+    )
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
@@ -65,7 +72,18 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 class Ficha(models.Model):
     nombre = models.CharField(max_length=100)
-    docentes = models.ManyToManyField('CustomUser', related_name='fichas_dictadas', blank=True, limit_choices_to={'role': 'docente'})
-
+    institucion = models.ForeignKey(
+        "instituciones.Institucion",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name="fichas"
+    )
+    docentes = models.ManyToManyField(
+        'CustomUser',
+        related_name='fichas_dictadas',
+        blank=True,
+        limit_choices_to={'role': 'docente'}
+    )
     def __str__(self):
         return self.nombre

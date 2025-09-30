@@ -4,21 +4,23 @@
 {% block content %}
 <div class="admin-dashboard">
     <h2>Bienvenido, {{ user.first_name }} (Admin)</h2>
-    <p>Desde aquí puedes gestionar los recursos de EduZen.</p>
+    <p>Selecciona una institución para gestionarla:</p>
 
-    <div class="admin-boxes">
-        <a href="{% url 'admins:user_list' %}" class="admin-box">
-            <i class="fas fa-users"></i>
-            <span>Usuarios</span>
-        </a>
-        <a href="{% url 'admin_materias_list' %}" class="admin-box">
-            <i class="fas fa-book"></i>
-            <span>Materias</span>
-        </a>
-        <a href="{% url 'admin_fichas_list' %}" class="admin-box">
-            <i class="fas fa-folder-open"></i>
-            <span>Fichas</span>
-        </a>
+    <div class="institutions-grid">
+        {% for inst in instituciones %}
+        <div class="institution-card">
+            <h3>{{ inst.nombre }}</h3>
+            <p><i class="fas fa-users"></i> {{ inst.total_usuarios }} usuarios</p>
+            <p><i class="fas fa-book"></i> {{ inst.total_materias }} materias</p>
+            <p><i class="fas fa-folder-open"></i> {{ inst.total_fichas }} fichas</p>
+
+            <a href="{% url 'admins:institution_detail' inst.id %}" class="btn-manage">
+                Gestionar
+            </a>
+        </div>
+        {% empty %}
+        <p>No hay instituciones registradas todavía.</p>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
