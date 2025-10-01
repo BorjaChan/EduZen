@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/docente.css' %}">
+{% endblock %}
+<div class="dashboard">
+    <h2>Bienvenid@ {{ request.user.first_name }} {{ request.user.last_name }}</h2>
+    <p>Aquí podrás gestionar tus materias y actividades como docente.</p>
+
+    <div class="cards">
+        <div class="card">
+            <i class="fas fa-book"></i>
+            <h3>Mis Materias</h3>
+            <p>{{ request.user.materias_dictadas.count }}</p>
+            <a href="{% url 'materias:list' %}">Ver Materias</a>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-plus-circle"></i>
+            <h3>Crear Materia</h3>
+          <a href="{% url 'docentes:crear' %}" class="btn btn-success"> Crear materia</a>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-tasks"></i>
+            <h3>Actividades Entregadas</h3>
+            <p>{{ request.user.actividades.count }}</p>
+            <a href="{% url 'materias:actividades' %}">Ver Actividades</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

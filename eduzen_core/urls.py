@@ -28,10 +28,11 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("users.urls")),  
     path("dashboard/", include("core.urls")),
-    path("students/", include("students.urls")),   
+    path("estudiantes/", include("estudiantes.urls")),   
     path("materias/", include("materias.urls")),
     path("admins/", include("admins.urls")),
     path("logout/", auth_views.LogoutView.as_view(next_page="/login/"), name="logout"),
+    path("docentes/", include("docentes.urls")),
 
 ]
 if settings.DEBUG:

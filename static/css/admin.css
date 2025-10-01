@@ -11,6 +11,7 @@
     color: #2C3E50;
 }
 
+/* ==== TABLA DE ADMIN ==== */
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -36,6 +37,7 @@
     margin-bottom: 15px;
 }
 
+/* ==== BOTONES ESPECÍFICOS ==== */
 .btn {
     padding: 8px 14px;
     border-radius: 6px;
@@ -45,20 +47,10 @@
     transition: background 0.3s;
 }
 
-.btn-primary {
-    background: #3498DB;
-    color: white;
-}
-
-.btn-primary:hover {
-    background: #217dbb;
-}
-
 .btn-secondary {
     background: #95A5A6;
     color: white;
 }
-
 .btn-secondary:hover {
     background: #7f8c8d;
 }
@@ -67,7 +59,6 @@
     background: #F39C12;
     color: white;
 }
-
 .btn-edit:hover {
     background: #d68910;
 }
@@ -76,7 +67,6 @@
     background: #E74C3C;
     color: white;
 }
-
 .btn-delete:hover {
     background: #c0392b;
 }
@@ -85,6 +75,8 @@
     background: #C0392B;
     color: white;
 }
+
+/* ==== FORMULARIOS ==== */
 .form-group {
     margin-bottom: 15px;
 }
@@ -109,4 +101,3 @@
     outline: none;
     box-shadow: 0 0 4px rgba(52, 152, 219, 0.5);
 }
-

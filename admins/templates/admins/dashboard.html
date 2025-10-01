@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Panel de Administración - EduZen{% endblock %}
 
 {% block content %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/admin.css' %}"/>
+{% endblock %}
+
 <div class="admin-dashboard">
     <h2>Bienvenido, {{ user.first_name }} (Admin)</h2>
     <p>Selecciona una institución para gestionarla:</p>

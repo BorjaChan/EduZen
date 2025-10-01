@@ -1,0 +1,61 @@
+/* ==== GRID DE CURSOS ==== */
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 280px));
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+/* ==== TARJETAS DE CURSOS ==== */
+.course-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-banner {
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+}
+
+.card-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.card-instructor {
+    font-size: 14px;
+    color: #555;
+}
+
+.card-deadline {
+    font-size: 13px;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ==== BOTÓN DE CURSO (hereda de btn-primary) ==== */
+.course-card .btn-primary {
+    margin-top: auto;
+}
+
+/* ==== CONTENIDO DEL DASHBOARD ==== */
+.dashboard .dash-content {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}

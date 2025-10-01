@@ -1,7 +1,9 @@
 /* FUENTE DE GOOGLE FONTS */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-/* ESTILOS GENERALES Y VARIABLES DE COLOR */
+/* ================================================== */
+/* === ESTILOS GENERALES Y VARIABLES DE COLOR === */
+/* ================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -25,7 +27,9 @@ body {
     display: flex;
 }
 
-/* ESTILOS DE LA BARRA LATERAL */
+/* ================================================== */
+/* === ESTILOS DE LA BARRA LATERAL === */
+/* ================================================== */
 nav {
     position: fixed;
     top: 0;
@@ -93,18 +97,25 @@ nav .menu-items a:hover {
     color: #000;
 }
 
-/* ESTILOS DEL CONTENIDO PRINCIPAL */
+/* ================================================== */
+/* === ESTILOS DEL CONTENIDO PRINCIPAL === */
+/* ================================================== */
 .dashboard {
-    
-    left: 250px;
+    flex: 1;
+    margin-left: 250px;       /* espacio para sidebar */
     background-color: var(--color-background);
     min-height: 100vh;
-    width: calc(100% - 250px);
-    padding: 10px 24px;
-    transition: all 0.5s ease;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
 }
 
-/* BARRA SUPERIOR */
+.dashboard.collapsed {
+    margin-left: 70px;
+}
+
+/* ================================================== */
+/* === BARRA SUPERIOR === */
+/* ================================================== */
 .dashboard .top {
     display: flex;
     align-items: center;
@@ -151,7 +162,9 @@ nav .menu-items a:hover {
     border-radius: 50%;
 }
 
-/* CONTENIDO DASHBOARD */
+/* ================================================== */
+/* === TITULOS Y SECCIONES === */
+/* ================================================== */
 .dashboard .dash-content {
     padding-top: 30px;
 }
@@ -181,214 +194,23 @@ nav .menu-items a:hover {
     color: var(--color-text);
 }
 
-/* TARJETAS DE RESUMEN */
-.dash-content .boxes {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.dash-content .boxes .box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 12px;
-    width: calc(100% / 3 - 15px);
-    padding: 25px 20px;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.04);
-}
-.boxes .box i{
-    font-size: 35px;
-    margin-bottom: 10px;
-}
-.boxes .box .text {
-    white-space: nowrap;
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--color-text);
-}
-
-.boxes .box .number {
-    font-size: 40px;
-    font-weight: 600;
-    color: var(--color-text);
-}
-
-.boxes .box.box1 { background-color: var(--color-primary); }
-.boxes .box.box2 { background-color: var(--color-secondary); }
-.boxes .box.box3 { background-color: var(--color-accent); }
-
-/* TABLA DE ACTIVIDADES/ASIGNATURAS */
-.dash-content .activity {
-    margin-top: 40px;
-}
-.activity .activity-table{
-    width: 100%;
-    border-collapse: collapse;
-    background-color: var(--color-panel);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.04);
-}
-.activity-table thead{
-    background-color: var(--color-primary);
-}
-.activity-table th{
-    padding: 16px;
-    text-align: left;
-    font-weight: 600;
-}
-.activity-table td{
-    padding: 16px;
-    border-bottom: 1px solid var(--color-border);
-}
-.activity-table tbody tr:last-child td{
-    border-bottom: none;
-}
-.btn-action{
+/* ================================================== */
+/* === BOTONES === */
+/* ================================================== */
+.btn-action {
     padding: 6px 16px;
     border-radius: 6px;
     border: none;
     cursor: pointer;
     font-weight: 500;
 }
-.btn-view{
+
+.btn-view {
     background-color: var(--color-secondary);
     color: var(--color-text);
 }
-/* Pega esto al FINAL de tu archivo style.css */
 
-/* ================================================== */
-/* === ESTILOS PARA LA NUEVA VISTA DE ESTUDIANTE === */
-/* ================================================== */
-
-.student-welcome {
-    margin-bottom: 30px;
-}
-.student-welcome h1 {
-    font-size: 28px;
-    font-weight: 600;
-    color: var(--color-text);
-}
-.student-welcome p {
-    font-size: 16px;
-    color: var(--color-text-light);
-}
-
-/* REEMPLAZA los estilos de la tarjeta anterior con ESTOS */
-
-.course-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 24px;
-}
-
-.course-card {
-    background-color: var(--color-panel);
-    border-radius: 16px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.course-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 20px rgba(0,0,0,0.08);
-}
-
-.card-banner {
-    height: 160px;
-    background-size: cover;
-    background-position: center;
-}
-
-.card-content {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-.card-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--color-text);
-    margin-bottom: 8px;
-}
-
-.card-instructor {
-    font-size: 14px;
-    color: var(--color-text-light);
-    margin-bottom: 16px;
-    font-weight: 500;
-}
-
-.card-instructor i {
-    margin-right: 8px;
-    color: var(--color-secondary);
-}
-
-/* === NUEVOS ESTILOS === */
-
-.card-deadline {
-    font-size: 13px;
-    color: var(--color-text-light);
-    background-color: #f8f9fa;
-    padding: 8px 12px;
-    border-radius: 8px;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-}
-
-.card-deadline i {
-    margin-right: 8px;
-    color: var(--color-accent);
-}
-
-.card-deadline .all-done {
-    font-style: italic;
-}
-.card-deadline .all-done i{
-    color: #28a745;
-}
-
-
-.card-stats {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 24px;
-}
-
-.stat-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    border-radius: 20px; /* Píldora */
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.stat-item i {
-    font-size: 16px;
-}
-
-.stat-completed {
-    background-color: #eaf7ed;
-    color: #2a7a41;
-}
-
-.stat-pending {
-    background-color: #fff8e1;
-    color: #e49c09;
-}
-
-
+/* === Botón genérico === */
 .btn-primary {
     display: inline-block;
     text-align: center;
@@ -401,22 +223,22 @@ nav .menu-items a:hover {
     text-decoration: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: auto; /* Empuja el botón al final */
+    margin-top: auto;
 }
 
 .btn-primary:hover {
     background-color: #29e6bc;
 }
-/* ===== MENU HAMBURGUESA ===== */
 
-/* Botón hamburguesa */
+/* ================================================== */
+/* === MENU HAMBURGUESA Y SIDEBAR RESPONSIVE === */
+/* ================================================== */
 .hamburger {
     font-size: 1.5rem;
     cursor: pointer;
     margin-right: 15px;
 }
 
-/* === Sidebar expandido === */
 #sidebar {
     width: 250px;
     background: #fff;
@@ -426,7 +248,6 @@ nav .menu-items a:hover {
     overflow: hidden;
 }
 
-/* === Sidebar colapsado === */
 #sidebar.collapsed {
     width: 70px;
 }
@@ -436,22 +257,12 @@ nav .menu-items a:hover {
 }
 
 #sidebar.collapsed .link-name {
-    display: none; /* oculta los textos al colapsar */
+    display: none;
 }
 
-/* === Contenido principal === */
-.dashboard {
-    flex: 1;
-    margin-left: 250px;
-    padding: 20px;
-    transition: margin-left 0.3s ease;
-}
-
-.dashboard.collapsed {
-    margin-left: 70px;
-}
-
-/* === Botón Logout === */
+/* ================================================== */
+/* === BOTÓN LOGOUT === */
+/* ================================================== */
 .logout-btn {
     display: flex;
     align-items: center;

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ materia.nombre }}</h2>
+<p>Docente: {{ materia.docente.first_name }} {{ materia.docente.last_name }}</p>
+
+<h3>Actividades</h3>
+<ul>
+    {% for act in actividades %}
+        <li>
+            <strong>{{ act.titulo }}</strong> (Entrega: {{ act.fecha_entrega }}) <br>
+            {{ act.descripcion }}
+            {% if user.role == "estudiante" %}
+                <a href="{% url 'materias:entregar_actividad' act.id %}">Subir entrega</a>
+            {% endif %}
+            {% if user.role == "docente" %}
+                <a href="#">Revisar entregas ({{ act.entregas.count }})</a>
+            {% endif %}
+        </li>
+    {% empty %}
+        <p>No hay actividades aún.</p>
+    {% endfor %}
+</ul>
+
+{% if user == materia.docente %}
+    <a href="{% url 'materias:crear_actividad' materia.id %}">+ Crear actividad</a>
+{% endif %}
+{% endblock %}

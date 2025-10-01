@@ -6,21 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>{% block title %}EduZen{% endblock %}</title>
 
-    <!-- Fuente Poppins -->
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-    <!-- Estilos principales -->
+
     <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/admin.css' %}"/>
+    
+    
+    
 
     {% block extra_css %}{% endblock %}
 </head>
 <body class="{% if request.path == '/login/' or request.path == '/register/' %}auth-page{% endif %}">
 
-    <!-- Sidebar -->
+
     <nav id="sidebar">
         <div class="logo">
             <div class="logo-icon">
@@ -41,13 +43,15 @@
             <li><a href="#"><i class="fas fa-book"></i> Gestionar Asignaturas</a></li>
 
             {% elif request.user.role|lower == "docente" %}
-            <li><a href="{% url 'teachers:dashboard' %}"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li><a href="{% url 'teachers:courses' %}"><i class="fas fa-graduation-cap"></i> Mis Cursos</a></li>
-            <li><a href="{% url 'teachers:subjects' %}"><i class="fas fa-book"></i> Mis Asignaturas</a></li>
+            <li><a href="{% url 'docentes:dashboard' %}"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="{% url 'materias:list' %}"><i class="fas fa-book"></i> Materias</a></li>
+            <li><a href="{% url 'materias:crear_actividad' %}"><i class="fas fa-tasks"></i> Actividades</a></li>
+            
+
         
             {% elif request.user.role|lower == "estudiante" %}
             <li><a href="{% url 'core:dashboard' %}"><i class="fa-solid fa-house"></i><span class="link-name">Dashboard</span></a></li>
-            <li><a href="{% url 'materias:list' %}"><i class="fa-solid fa-book"></i><span class="link-name">Materias</span></a></li>
+            <li><a href="{% url 'materias:mis_materias' %}"><i class="fa-solid fa-book"></i><span class="link-name">Materias</span></a></li>
             <li><a href="{% url 'materias:actividades' %}"><i class="fa-solid fa-list-check"></i><span class="link-name">Actividades</span></a></li>
             <li><a href="{% url 'materias:seguimiento' %}"><i class="fa-solid fa-chart-line"></i><span class="link-name">Seguimiento</span></a></li>
             <li><a href="{% url 'materias:reuniones' %}"><i class="fa-solid fa-comments"></i><span class="link-name">Reuniones</span></a></li>
@@ -56,7 +60,7 @@
                 </ul>
             
 
-            <!-- Botón logout igual que los demás -->
+
             <ul class="logout-mode">
                 <li>
                    <form method="post" action="{% url 'users:logout' %}">
@@ -72,10 +76,9 @@
         </div>
     </nav>
 
-    <!-- Contenido -->
+   
     <section class="dashboard">
         <div class="top">
-            <!-- Botón hamburguesa -->
             <i class="fa-solid fa-bars hamburger" onclick="toggleSidebar()"></i>
         </div>
 
@@ -85,7 +88,7 @@
         </div>
     </section>
 
-    <!-- Scripts -->
+    
     <script>
         function toggleSidebar() {
             document.getElementById("sidebar").classList.toggle("collapsed");
