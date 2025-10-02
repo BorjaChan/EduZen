@@ -15,4 +15,5 @@ urlpatterns = [
     path("nueva/", views.crear_materia, name="crear_materia"),
     path("<int:pk>/crear-actividad/", views.crear_actividad, name="crear_actividad"),
     path("actividad/<int:actividad_id>/entregar/", views.entregar_actividad, name="entregar_actividad"),
+    path("materia/<int:pk>/eliminar/", views.eliminar_materia, name="eliminar_materia"),
 ]

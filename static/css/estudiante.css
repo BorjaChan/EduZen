@@ -1,0 +1,151 @@
+/* ==== DASHBOARD ESTUDIANTE ==== */
+.dashboard-content {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* ==== BIENVENIDA ==== */
+.student-welcome h2 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--color-text);
+}
+
+.student-welcome p {
+    color: var(--color-text-light);
+    margin-bottom: 30px;
+    font-size: 15px;
+}
+
+/* ==== CUADROS DE ESTADÍSTICAS ==== */
+.boxes {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.box {
+    flex: 1;
+    min-width: 220px;
+    padding: 20px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.box i {
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: var(--color-primary);
+}
+
+.box .text {
+    font-size: 15px;
+    color: var(--color-text-light);
+}
+
+.box .number {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+/* Colores diferenciados */
+.box1 i { color: #2563eb; }
+.box2 i { color: #eab308; }
+.box3 i { color: #22c55e; }
+
+/* ==== ÚLTIMAS ACTIVIDADES ==== */
+.activity .title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.activity .title i {
+    color: var(--color-primary);
+    font-size: 20px;
+}
+
+/* ==== TABLA ==== */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.activity-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.activity-table th, 
+.activity-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.activity-table th {
+    background: var(--color-primary);
+    color: #fff;
+    font-weight: 600;
+}
+
+.activity-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* ==== ESTADOS ==== */
+.stat-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.stat-pending {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.stat-completed {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+/* ==== BOTONES ==== */
+.btn-action {
+    border: none;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.btn-view {
+    background: #c7d2fe;
+    color: #1e3a8a;
+}
+
+.btn-view:hover {
+    background: #a5b4fc;
+}

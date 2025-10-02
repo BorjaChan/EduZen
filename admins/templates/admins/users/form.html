@@ -1,5 +1,10 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %} Crear Usuario {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/admin2.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="form-container">

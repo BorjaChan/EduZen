@@ -1,61 +1,203 @@
+/* ==== CONTENEDOR PRINCIPAL DE MATERIAS ==== */
+.materias-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ==== ENCABEZADO DE MATERIAS ==== */
+.materias-container .materias-header {
+    margin-bottom: 30px;
+}
+
+.materias-container .materias-header h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.materias-container .materias-header p {
+    font-size: 16px;
+    color: #666;
+}
+
 /* ==== GRID DE CURSOS ==== */
-.course-grid {
+.materias-container .course-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 280px));
-    gap: 20px;
-    justify-content: flex-start;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    justify-content: start;
 }
 
 /* ==== TARJETAS DE CURSOS ==== */
-.course-card {
+.materias-container .course-card {
     background: white;
     border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
 }
 
-.card-banner {
-    height: 150px;
+.materias-container .course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+/* ==== BANNER DE LA TARJETA ==== */
+.materias-container .card-banner {
+    height: 160px;
     background-size: cover;
     background-position: center;
+    background-color: #e0e0e0;
+    position: relative;
 }
 
-.card-content {
-    padding: 15px;
+.materias-container .card-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.3));
+}
+
+/* ==== CONTENIDO DE LA TARJETA ==== */
+.materias-container .card-content {
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
+    flex-grow: 1;
 }
 
-.card-title {
+/* ==== TÍTULO DE LA TARJETA ==== */
+.materias-container .card-title {
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 600;
     margin: 0;
+    color: #333;
+    line-height: 1.4;
 }
 
-.card-instructor {
+/* ==== INSTRUCTOR ==== */
+.materias-container .card-instructor {
     font-size: 14px;
     color: #555;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.card-deadline {
+.materias-container .card-instructor i {
+    color: #4CAF50;
+    font-size: 16px;
+}
+
+/* ==== FECHA LÍMITE ==== */
+.materias-container .card-deadline {
     font-size: 13px;
     color: #888;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
 }
 
-/* ==== BOTÓN DE CURSO (hereda de btn-primary) ==== */
-.course-card .btn-primary {
+.materias-container .card-deadline i {
+    color: #ff9800;
+    font-size: 14px;
+}
+
+/* ==== ESTADÍSTICAS (opcional) ==== */
+.materias-container .card-stats {
+    display: flex;
+    gap: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 13px;
+    color: #666;
+}
+
+.materias-container .card-stats span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.materias-container .card-stats i {
+    color: #4CAF50;
+}
+
+/* ==== BOTÓN DE LA TARJETA ==== */
+.materias-container .card-content .btn-primary {
     margin-top: auto;
+    width: 100%;
+    text-align: center;
+    padding: 12px 20px;
+    background-color: var(--color-primary, #33FFCE);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: block;
 }
 
-/* ==== CONTENIDO DEL DASHBOARD ==== */
-.dashboard .dash-content {
-    width: 100%;
-    margin: 0 auto;
-    padding: 20px;
+.materias-container .card-content .btn-primary:hover {
+    background-color: #29e6bc;
+    transform: scale(1.02);
+}
+
+/* ==== MENSAJE VACÍO ==== */
+.materias-container .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+}
+
+.materias-container .empty-state i {
+    font-size: 64px;
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+.materias-container .empty-state h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.materias-container .empty-state p {
+    font-size: 16px;
+    color: #888;
+}
+
+/* ==== RESPONSIVE ==== */
+@media (max-width: 1024px) {
+    .materias-container .course-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .materias-container .course-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .materias-container {
+        padding: 15px;
+    }
+    
+    .materias-container .card-banner {
+        height: 140px;
+    }
 }

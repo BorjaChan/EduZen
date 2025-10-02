@@ -1,45 +1,45 @@
-{% extends "base.html" %}  
-{% load static %}
+{% extends "base.html" %}
 
-{% block content %}
+{% load static %} 
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/materias.css' %}">
 {% endblock %}
-<section class="dashboard">
 
-    <div class="dash-content">
-        <div class="student-welcome">
-            <h1>Mis Materias</h1>
-            <p>Organiza tus entregas y mantente al día.</p>
-        </div>
-
-        <div class="course-grid">
-            {% for materia in materias %}
-            <div class="course-card">
-                <div class="card-banner" style="background-image: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?...');"></div>
-                <div class="card-content">
-                    <h3 class="card-title">{{ materia.nombre }}</h3>
-                    <p class="card-instructor"><i class="fas fa-chalkboard-teacher"></i> {{ materia.docente.first_name }}</p>
-                    
-                    <div class="card-deadline">
-                        <i class="fas fa-bell"></i>
-                        <span>
-                            {% if materia.actividades.first %}
-                                Próxima entrega: <strong>{{ materia.actividades.first.titulo }}</strong> - {{ materia.actividades.first.fecha_entrega }}
-                            {% else %}
-                                Sin actividades programadas
-                            {% endif %}
-                        </span>
-                    </div>
-
-                    <a href="{% url 'materias:detalle' materia.id %}" class="btn-primary">Ver actividades</a>
-                </div>
-            </div>
-            {% empty %}
-            <p>No tienes materias asignadas todavía.</p>
-            {% endfor %}
-        </div>
+{% block content %}
+<div class="materias-container">
+    <div class="materias-header">
+        <h2>Mis Materias</h2>
+        <p>Explora y gestiona tus materias activas</p>
     </div>
-</section>
+
+    {% if materias %}
+    <div class="course-grid">
+        {% for materia in materias %}
+        <div class="course-card">
+            <div class="card-banner" style="background-image: url('{% static 'img/materias3.png' %}');"></div>
+            
+            <div class="card-content">
+                <h3 class="card-title">{{ materia.nombre }}</h3>
+                
+                <div class="card-instructor">
+                    <i class="fas fa-user"></i>
+                    <span>{{ materia.docente.get_full_name }}</span>
+                </div>
+                
+                <a href="{% url 'materias:detalle' materia.id %}" class="btn-primary">
+                    Ver actividades
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <i class="fas fa-book-open"></i>
+        <h3>No hay materias disponibles</h3>
+        <p>Aún no estás inscrito en ninguna materia</p>
+    </div>
+    {% endif %}
+</div>
 {% endblock %}

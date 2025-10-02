@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/estudiante.css' %}">
+{% endblock %}
+
 {% block title %}Dashboard - EduZen{% endblock %}
 
 {% block page_title %}Inicio{% endblock %}
@@ -16,23 +20,22 @@
         <div class="box box1">
             <i class="fas fa-book"></i>
             <div class="text">Materias</div>
-            <div class="number">4</div>
+            <div class="number">{{ total_materias }}</div>
         </div>
         <div class="box box2">
             <i class="fas fa-tasks"></i>
             <div class="text">Tareas Pendientes</div>
-            <div class="number">3</div>
+            <div class="number">{{ tareas_pendientes }}</div>
         </div>
         <div class="box box3">
             <i class="fas fa-check-circle"></i>
             <div class="text">Completadas</div>
-            <div class="number">12</div>
+            <div class="number">{{ tareas_completadas }}</div>
         </div>
     </div>
 
     <div class="activity">
         <div class="title">
-            <i class="fas fa-bell"></i>
             <span class="text">Últimas actividades</span>
         </div>
         <div class="table-responsive">
@@ -47,23 +50,31 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for act in ultimas_actividades %}
                     <tr>
-                        <td>Cuestionario Cap. 1</td>
-                        <td>Redes</td>
-                        <td><span class="stat-item stat-pending"><i class="fas fa-hourglass-half"></i> Pendiente</span></td>
-                        <td>10 julio</td>
-                        <td><button class="btn-action btn-view">Ver</button></td>
+                        <td>{{ act.titulo }}</td>
+                        <td>{{ act.materia.nombre }}</td>
+                        <td>
+                            {% if act.estado == "completado" %}
+                            <span class="stat-item stat-completed"><i class="fas fa-check"></i> Completado</span>
+                            {% else %}
+                            <span class="stat-item stat-pending"><i class="fas fa-hourglass-half"></i> Pendiente</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ act.fecha_entrega|date:"d M Y" }}</td>
+                        <td>
+                            <a href="{% url 'actividad_detalle' act.id %}" class="btn-action btn-view">Ver</a>
+                        </td>
                     </tr>
+                    {% empty %}
                     <tr>
-                        <td>Ensayo sobre OSI</td>
-                        <td>Sistemas</td>
-                        <td><span class="stat-item stat-completed"><i class="fas fa-check"></i> Completado</span></td>
-                        <td>5 julio</td>
-                        <td><button class="btn-action btn-view">Ver</button></td>
+                        <td colspan="5">No tienes actividades registradas.</td>
                     </tr>
+                    {% endfor %}
                 </tbody>
+
             </table>
         </div>
     </div>
-</section>
-{% endblock %}
+
+    {% endblock %}

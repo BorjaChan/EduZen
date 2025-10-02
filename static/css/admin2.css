@@ -1,0 +1,386 @@
+/* ================================================== */
+/* === ADMIN.CSS - GESTIÓN DE USUARIOS === */
+/* ================================================== */
+
+/* ==== CONTENEDOR PRINCIPAL ==== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+/* ==== TÍTULO PRINCIPAL ==== */
+.container .title {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--color-text, #333);
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.container .title::before {
+    content: '';
+    width: 4px;
+    height: 32px;
+    background: var(--color-primary, #33FFCE);
+    border-radius: 2px;
+}
+
+/* ==== SECCIÓN DE ACCIONES ==== */
+.container .actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+/* ==== TABLA DE USUARIOS ==== */
+.container .table {
+    width: 100%;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-collapse: collapse;
+}
+
+.container .table thead {
+    background: linear-gradient(135deg, var(--color-primary, #33FFCE), var(--color-secondary, #A4B7FF));
+}
+
+.container .table thead tr th {
+    padding: 16px;
+    text-align: left;
+    font-weight: 600;
+    color: #000;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.container .table tbody tr {
+    border-bottom: 1px solid var(--color-border, #E0E0E0);
+    transition: background-color 0.2s ease;
+}
+
+.container .table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.container .table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.container .table tbody td {
+    padding: 16px;
+    color: var(--color-text, #333);
+    font-size: 14px;
+}
+
+.container .table tbody td:first-child {
+    font-weight: 600;
+    color: var(--color-secondary, #A4B7FF);
+}
+
+/* ==== MENSAJE VACÍO ==== */
+.container .table tbody tr td[colspan] {
+    text-align: center;
+    padding: 40px;
+    color: var(--color-text-light, #888);
+    font-style: italic;
+}
+
+/* ==== BOTONES DE ACCIÓN EN TABLA ==== */
+.container .table .btn {
+    padding: 8px 14px;
+    margin-right: 8px;
+    font-size: 13px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.container .table .btn-edit {
+    background-color: var(--color-secondary, #A4B7FF);
+    color: #000;
+}
+
+.container .table .btn-edit:hover {
+    background-color: #8fa3ff;
+    transform: translateY(-2px);
+}
+
+.container .table .btn-delete {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.container .table .btn-delete:hover {
+    background-color: #ff5252;
+    transform: translateY(-2px);
+}
+
+/* ==== BOTÓN PRINCIPAL (CREAR) ==== */
+.container .btn-primary {
+    background-color: var(--color-primary, #33FFCE);
+    color: #000;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.container .btn-primary:hover {
+    background-color: #29e6bc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(51, 255, 206, 0.3);
+}
+
+/* ================================================== */
+/* === FORMULARIO DE CREACIÓN/EDICIÓN === */
+/* ================================================== */
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.form-container h2 {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--color-text, #333);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.form-container form {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.form-container form p {
+    margin-bottom: 20px;
+}
+
+.form-container form label {
+    display: block;
+    font-weight: 500;
+    color: var(--color-text, #333);
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-container form input,
+.form-container form select,
+.form-container form textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--color-border, #E0E0E0);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+.form-container form input:focus,
+.form-container form select:focus,
+.form-container form textarea:focus {
+    outline: none;
+    border-color: var(--color-primary, #33FFCE);
+    box-shadow: 0 0 0 3px rgba(51, 255, 206, 0.1);
+}
+
+.form-container form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* ==== BOTONES DEL FORMULARIO ==== */
+.form-container form button,
+.form-container form .btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 10px;
+    margin-top: 20px;
+    text-decoration: none;
+}
+
+.form-container .btn-primary {
+    background-color: var(--color-primary, #33FFCE);
+    color: #000;
+}
+
+.form-container .btn-primary:hover {
+    background-color: #29e6bc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(51, 255, 206, 0.3);
+}
+
+.form-container .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.form-container .btn-secondary:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+/* ================================================== */
+/* === CONFIRMACIÓN DE ELIMINACIÓN === */
+/* ================================================== */
+.delete-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.delete-container h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #dc3545;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.delete-container p {
+    text-align: center;
+    font-size: 18px;
+    color: var(--color-text, #333);
+    margin-bottom: 30px;
+}
+
+.delete-container form {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.delete-container .btn-danger {
+    background-color: #dc3545;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 10px;
+}
+
+.delete-container .btn-danger:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+.delete-container .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.delete-container .btn-secondary:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+/* ================================================== */
+/* === MENSAJES DE ERROR/ÉXITO === */
+/* ================================================== */
+.form-container .errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.form-container .errorlist li {
+    color: #dc3545;
+    font-size: 13px;
+    padding: 8px 12px;
+    background-color: #f8d7da;
+    border-radius: 6px;
+    margin-bottom: 5px;
+}
+
+.form-container .helptext {
+    font-size: 12px;
+    color: var(--color-text-light, #888);
+    margin-top: 5px;
+    display: block;
+}
+
+/* ================================================== */
+/* === RESPONSIVE === */
+/* ================================================== */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 15px;
+    }
+
+    .container .table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .container .actions {
+        justify-content: center;
+    }
+
+    .form-container,
+    .delete-container {
+        padding: 20px 15px;
+    }
+
+    .form-container form,
+    .delete-container form {
+        padding: 20px;
+    }
+
+    .container .table .btn {
+        padding: 6px 10px;
+        font-size: 12px;
+        margin-right: 4px;
+        margin-bottom: 4px;
+    }
+}

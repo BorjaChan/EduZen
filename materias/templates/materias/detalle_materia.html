@@ -23,6 +23,10 @@
 </ul>
 
 {% if user == materia.docente %}
-    <a href="{% url 'materias:crear_actividad' materia.id %}">+ Crear actividad</a>
+    <div style="margin-top: 20px;">
+        <a href="{% url 'materias:crear_actividad' materia.id %}" class="btn btn-primary">+ Crear actividad</a>
+        <a href="{% url 'materias:eliminar_materia' materia.id %}" class="btn btn-danger">🗑 Eliminar materia</a>
+    </div>
 {% endif %}
+
 {% endblock %}

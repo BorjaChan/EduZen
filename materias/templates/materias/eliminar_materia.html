@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Eliminar Materia</h2>
+<p>¿Seguro que deseas eliminar la materia <strong>{{ materia.nombre }}</strong>? Esta acción no se puede deshacer.</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+    <a href="{% url 'materias:detalle' materia.pk %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

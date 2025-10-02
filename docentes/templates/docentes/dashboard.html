@@ -2,34 +2,84 @@
 
 {% load static %}
 
-{% block content %}
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/docente.css' %}">
 {% endblock %}
-<div class="dashboard">
-    <h2>Bienvenid@ {{ request.user.first_name }} {{ request.user.last_name }}</h2>
-    <p>Aquí podrás gestionar tus materias y actividades como docente.</p>
+
+{% block content %}
+<div class="dashboard-docente">
+    <div class="dashboard-header">
+        <h2>Bienvenid@ {{ request.user.first_name }} {{ request.user.last_name }}</h2>
+        <p>Aquí podrás gestionar tus materias y actividades como docente.</p>
+    </div>
 
     <div class="cards">
         <div class="card">
             <i class="fas fa-book"></i>
             <h3>Mis Materias</h3>
-            <p>{{ request.user.materias_dictadas.count }}</p>
-            <a href="{% url 'materias:list' %}">Ver Materias</a>
+            <p class="count">Total: {{ request.user.materias_dictadas.count }}</p>
+
+            {% if request.user.materias_dictadas.all %}
+            <ul class="materias-list">
+                {% for materia in request.user.materias_dictadas.all %}
+                <li>
+                    <span>{{ materia.nombre }}</span>
+                    <form action="{% url 'materias:eliminar_materia' materia.id %}" method="post" class="delete-form">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">🗑</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="empty-message">No tienes materias creadas.</p>
+            {% endif %}
+
+            <a href="{% url 'materias:list' %}" class="btn btn-primary">Ver todas</a>
         </div>
 
         <div class="card">
             <i class="fas fa-plus-circle"></i>
             <h3>Crear Materia</h3>
-          <a href="{% url 'docentes:crear' %}" class="btn btn-success"> Crear materia</a>
+            <p class="description">Agrega una nueva materia para comenzar a gestionar contenido</p>
+            <a href="{% url 'docentes:crear' %}" class="btn btn-success">Crear materia</a>
         </div>
 
         <div class="card">
             <i class="fas fa-tasks"></i>
             <h3>Actividades Entregadas</h3>
-            <p>{{ request.user.actividades.count }}</p>
-            <a href="{% url 'materias:actividades' %}">Ver Actividades</a>
+            <p class="count">{{ request.user.actividades.count }} actividades</p>
+            <a href="{% url 'materias:actividades' %}" class="btn btn-primary">Ver Actividades</a>
         </div>
     </div>
 </div>
+
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const deleteForms = document.querySelectorAll(".delete-form");
+
+    deleteForms.forEach(form => {
+        form.addEventListener("submit", function(e) {
+            e.preventDefault(); // Evita que se envíe de una vez
+
+            Swal.fire({
+                title: '¿Eliminar materia?',
+                text: "Esta acción no se puede deshacer",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    });
+});
+</script>
 {% endblock %}

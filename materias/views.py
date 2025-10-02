@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.http import HttpResponseForbidden
 from .forms import ActividadForm
 from .models import Actividad, Entrega
@@ -121,3 +122,18 @@ def entregar_actividad(request, actividad_id):
     else:
         form = EntregaForm()
     return render(request, "materias/entregar_actividad.html", {"form": form, "actividad": actividad})
+
+@login_required
+def eliminar_materia(request, pk):
+    materia = get_object_or_404(Materia, pk=pk)
+
+    
+    if request.user != materia.docente:
+        return HttpResponseForbidden("No tienes permiso para eliminar esta materia.")
+
+    if request.method == "POST":
+        materia.delete()
+        messages.success(request, "La materia fue eliminada correctamente.")
+        return redirect("materias:mis_materias") 
+
+    return render(request, "materias/eliminar_materia.html", {"materia": materia})

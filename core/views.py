@@ -8,6 +8,6 @@ def dashboard_view(request):
     if role == "docente":
         return render(request, "docentes/dashboard.html")
     elif role == "estudiante":
-        return render(request, "dashboard.html")
+        return render(request, "estudiantes/dashboard.html")
     else:
         return render(request, "dashboard/dashboard.html")
