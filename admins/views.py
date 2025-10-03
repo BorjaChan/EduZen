@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from users.forms import CustomUserCreationForm, CustomUserChangeForm  
 from .decorators import admin_required   
 from instituciones.models import Institucion
+from instituciones.forms import InstitucionForm
 
 User = get_user_model()  
 
@@ -91,18 +92,21 @@ def institucion_list(request):
     instituciones = Institucion.objects.all()
     return render(request, "admins/instituciones/list.html", {"instituciones": instituciones})
 
+@login_required
+@admin_required
 def institucion_create(request):
     if request.method == "POST":
-        nombre = request.POST.get("nombre")
-        politica_retencion = request.POST.get("politica_retencion")
-        asignacion_grupo = request.POST.get("asignacion_grupo")
-        asignacion_materia = request.POST.get("asignacion_materia")
+        form = InstitucionForm(request.POST)
+        if form.is_valid():
+            institucion = form.save(commit=False)
+            institucion.creado_por = request.user  #admin la crea
+            institucion.save()
+            return redirect("admins:institucion_list")
+    else:
+        form = InstitucionForm()
+    return render(request, "admins/instituciones/create.html", {"form": form})
 
-        Institucion.objects.create(
-            nombre=nombre,
-            politica_retencion=politica_retencion,
-            asignacion_grupo=asignacion_grupo,
-            asignacion_materia=asignacion_materia,
-        )
-        return redirect("admins:institucion_list")
-    return render(request, "admins/instituciones/create.html")
+def institucion_delete(request, pk):
+    institucion = get_object_or_404(Institucion, pk=pk)
+    institucion.delete()
+    return redirect('admins:institucion_list')

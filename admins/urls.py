@@ -12,5 +12,6 @@ urlpatterns = [
     path("institucion/<int:pk>/", views.institution_detail, name="institution_detail"),
     path("instituciones/", views.institucion_list, name="institucion_list"),
     path("instituciones/create/", views.institucion_create, name="institucion_create"),
+    path('institucion/<int:pk>/delete/', views.institucion_delete, name='institucion_delete'),
 
 ]

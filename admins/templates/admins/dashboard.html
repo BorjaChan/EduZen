@@ -28,5 +28,10 @@
         <p>No hay instituciones registradas todavía.</p>
         {% endfor %}
     </div>
+
+    
+    <div class="create-institution">
+        <a href="{% url 'admins:institucion_create' %}" class="btn btn-primary">➕ Crear Institución</a>
+    </div>
 </div>
 {% endblock %}

@@ -1,13 +1,26 @@
 {% extends 'base.html' %}
-{% block content %}
-<h2>Instituciones</h2>
-<a href="{% url 'admins:institucion_create' %}" class="btn">+ Crear Institución</a>
+{% load static %}
 
-<ul>
-    {% for institucion in instituciones %}
-        <li>{{ institucion.nombre }} - {{ institucion.get_asignacion_grupo_display }} / {{ institucion.get_asignacion_materia_display }}</li>
-    {% empty %}
-        <li>No hay instituciones aún</li>
-    {% endfor %}
-</ul>
+{% block title %}Lista de Instituciones{% endblock %}
+
+{% block content %}
+<div class="institution-list">
+    <h2>Instituciones registradas</h2>
+
+    <div class="institutions-grid">
+        {% for inst in instituciones %}
+        <div class="institution-card">
+            <h3>{{ inst.nombre }}</h3>
+            <p>{{ inst.descripcion|truncatechars:100 }}</p>
+            <a href="{% url 'admins:institution_detail' inst.id %}" class="btn btn-primary">Gestionar</a>
+        </div>
+        {% empty %}
+        <p>No hay instituciones registradas aún.</p>
+        {% endfor %}
+    </div>
+
+    <div class="create-institution">
+        <a href="{% url 'admins:institucion_create' %}" class="btn btn-success">➕ Crear nueva institución</a>
+    </div>
+</div>
 {% endblock %}

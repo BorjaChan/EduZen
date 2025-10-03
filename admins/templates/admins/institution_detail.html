@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Detalle de Institución - {{ institucion.nombre }}{% endblock %}
+
+{% block content %}
+<div class="institution-detail">
+    <h2>{{ institucion.nombre }}</h2>
+    <p>{{ institucion.descripcion }}</p>
+
+    <h3>Resumen</h3>
+    <ul>
+        <li><strong>Usuarios:</strong> {{ institucion.usuarios.count }}</li>
+        <li><strong>Fichas:</strong> {{ institucion.fichas.count }}</li>
+        <li><strong>Materias:</strong> {{ institucion.materias.count }}</li>
+    </ul>
+
+    <div class="actions">
+        <a href="{% url 'admins:institucion_list' %}" class="btn btn-secondary">⬅ Volver</a>
+
+        <!-- Botón para borrar institución con confirmación -->
+        <form method="post" action="{% url 'admins:institucion_delete' institucion.id %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger" 
+                onclick="return confirm('⚠ ¿Seguro que deseas eliminar esta institución? Esta acción no se puede deshacer.')">
+                🗑 Eliminar
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

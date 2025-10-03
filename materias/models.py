@@ -1,11 +1,19 @@
 from django.db import models
 from users.models import CustomUser, Ficha
 from django.conf import settings
+from instituciones.models import Institucion
 
 class Materia(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField(blank=True)
     ficha = models.ForeignKey(Ficha, on_delete=models.CASCADE, related_name="materias")
+    institucion = models.ForeignKey(
+    "instituciones.Institucion",
+    on_delete=models.CASCADE,
+    related_name="materias",
+    null=True,  
+    blank=True
+)
     docente = models.ForeignKey(
         CustomUser,
         on_delete=models.SET_NULL,
